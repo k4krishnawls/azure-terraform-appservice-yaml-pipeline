@@ -61,7 +61,7 @@ stages :
       displayName: Validate infra
       continueOnError: false
       steps:
-      - task: TerraformInstaller@0
+      - task: Terraform
         displayName: 'install'
         inputs:
           terraformVersion: latest
@@ -167,7 +167,7 @@ stages :
          deploy:
             steps:
               - checkout: self
-              - task: TerraformInstaller@0
+              - task: Terraform
                 displayName: 'install'
                 inputs:
                   terraformVersion: latest
