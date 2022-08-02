@@ -65,7 +65,7 @@ stages :
         displayName: 'install'
         inputs:
           terraformVersion: latest
-      - task: TerraformCLI@0
+      - task: Terraform
         displayName: 'init'
         inputs:
           backendType: azurerm
@@ -75,7 +75,7 @@ stages :
           backendAzureRmStorageAccountName: 'tfops'
           backendAzureRmContainerName: 'tfstate'
           backendAzureRmKey: tfstate.tfstate
-      - task: TerraformCLI@0
+      - task: Terraform
         displayName: 'validate'
         inputs:
           backendType: 'azurerm'
@@ -95,7 +95,7 @@ stages :
                 displayName: 'install'
                 inputs:
                   terraformVersion: latest
-              - task: TerraformCLI@0
+              - task: Terraform
                 displayName: 'init'
                 inputs:
                   backendType: azurerm
@@ -105,20 +105,20 @@ stages :
                   backendAzureRmStorageAccountName: 'tfops'
                   backendAzureRmContainerName: 'tfstate'
                   backendAzureRmKey: tfstate.tfstate
-              # - task: TerraformCLI@0
+              # - task: Terraform
               #   displayName: create workspace dev
               #   continueOnError: 'true'
               #   inputs:
               #     command: workspace        
               #     workspaceSubCommand: new
               #     workspaceName: dev 
-              - task: TerraformCLI@0
+              - task: Terraform
                 displayName: select workspace dev
                 inputs:
                   command: workspace        
                   workspaceSubCommand: select
                   workspaceName: dev      
-              - task: TerraformCLI@0
+              - task: Terraform
                 displayName: 'plan'
                 inputs:
                   backendType: 'azurerm'
@@ -126,7 +126,7 @@ stages :
                   commandOptions: '-out=plan-dev -var-file=dev.tfvars'
                   environmentServiceName: $(azureSubscription)
                   publishPlanResults: 'terraform_plan'
-              - task: TerraformCLI@0
+              - task: Terraform
                 displayName: 'apply'
                 inputs:
                   backendType: 'azurerm'
@@ -171,7 +171,7 @@ stages :
                 displayName: 'install'
                 inputs:
                   terraformVersion: latest
-              - task: TerraformCLI@0
+              - task: Terraform
                 displayName: 'init'
                 inputs:
                   backendType: azurerm
@@ -181,20 +181,20 @@ stages :
                   backendAzureRmStorageAccountName: 'tfops'
                   backendAzureRmContainerName: 'tfstate'
                   backendAzureRmKey: tfstate.tfstate
-              # - task: TerraformCLI@0
+              # - task: Terraform
               #   displayName: create workspace prod
               #   continueOnError: 'true'
               #   inputs:
               #     command: workspace        
               #     workspaceSubCommand: new
               #     workspaceName: prod                 
-              - task: TerraformCLI@0
+              - task: Terraform
                 displayName: select workspace prod
                 inputs:
                   command: workspace        
                   workspaceSubCommand: select
                   workspaceName: prod              
-              - task: TerraformCLI@0
+              - task: Terraform
                 displayName: 'plan'
                 inputs:
                   backendType: 'azurerm'
@@ -202,7 +202,7 @@ stages :
                   commandOptions: '-out=plan-prod -var-file=prod.tfvars' 
                   environmentServiceName: $(azureSubscription)
                   publishPlanResults: 'terraform_plan'
-              - task: TerraformCLI@0
+              - task: Terraform
                 displayName: 'apply'
                 inputs:
                   backendType: 'azurerm'
