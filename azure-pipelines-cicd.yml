@@ -31,10 +31,10 @@ steps:
 
 - task: PublishPipelineArtifact@1
     inputs:
-      targetPath: '$(Build.ArtifactStagingDirectory)' 
-      artifactName: drop
+    targetPath: '$(Build.ArtifactStagingDirectory)' 
+    artifactName: drop
 
-steps:
+
 - task: AzureRmWebAppDeployment@3
   displayName: 'Azure App Service Deploy: $(appservicename)'
   inputs:
