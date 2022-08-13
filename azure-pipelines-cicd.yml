@@ -1,6 +1,6 @@
 pool:
   vmimage: 'windows-2019'
-
+steps:
 - task: DotNetCoreCLI@2
   displayName: Restore
   inputs:
@@ -28,16 +28,11 @@ pool:
     arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
     zipAfterPublish: True
 
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact'
-  inputs:
-    PathtoPublish: '$(build.artifactstagingdirectory)'
 
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: '$(System.DefaultWorkingDirectory)'
-    Contents: '**/*.tf'
-    TargetFolder: '$(build.artifactstagingdirectory)'
+- task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: '$(Build.ArtifactStagingDirectory)' 
+      artifactName: drop
 
 steps:
 - task: AzureRmWebAppDeployment@3
